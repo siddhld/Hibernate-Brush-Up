@@ -12,12 +12,12 @@ public class Update {
             session = HibernateUtil.getSession();
 
             // Retrieving
-            Song song = session.get(Song.class, 3);
+            Song song = session.get(Song.class, 5);
 
             // Updating
             session.beginTransaction();
-            song.setName("Fine Line");
-            session.persist(song);
+            song.setName("Late Night Talking");
+            session.update(song);
             session.getTransaction().commit();
 
         } catch (Exception ex) {
@@ -32,3 +32,9 @@ public class Update {
         }
     }
 }
+
+////// Why Update happens without "session.update(song);"
+
+//    Automatic Dirty Checking:
+//    Hibernate uses a feature called "automatic dirty checking."
+//    This means it automatically detects changes to managed entities and synchronizes those changes with the database during transaction commit.
